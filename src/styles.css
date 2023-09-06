@@ -1,17 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,700&display=swap');
+
+/* font-family: 'DM Sans', sans-serif; */
+
+* {
+  box-sizing: border-box;
+  font-family: 'DM Sans', sans-serif;
+}
+
 body {
   font-family: sans-serif;
-  overflow: hidden;
+  margin: 0;
+  overflow-x: hidden;
+  padding: 0;
 }
+
 #webgi-canvas {
   width: 100%;
   height: 100%;
-  border-radius: 0.5rem;
+  position: fixed;
+  top: 0;
 }
-#webgi-canvas-container{
-  width: 80vw;
-  height: 80vh;
-  margin: 10vh 10vw;
-  border-radius: 0.5rem;
 
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+#webgi-canvas-container{
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  position: fixed;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  align-items: center;
+}
+
+nav {
+  width: 100%;
+  padding: 1.3em 3em;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.button--nav {
+  font-size: 17px;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 0.5em 1.5em;
+  border: none;
+  background: white;
+  border-radius: 25px;
+  color: #ed675f;
+}
+
+.logo {
+  width: 11em;
+}
+
+.section {
+  height: 100vh;
+  display: flex;
+  padding: 0 3em;
+}
+
+.first--section {
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.first--section h1 {
+  font-size: 10em;
+  text-align: right;
+  line-height: 1em;
+  width: 50%;
+  color: #0d0e0f;
+}
+
+
+
+.custom--bg {
+  width: 100%;
+  height: 9em;
+  transform: skew(16deg) rotate(16deg);
+  background: #ed675f;
+  position: absolute;
+  left: 0;
+  z-index: -1;
+  top: -21%;
+}
+
+.custom--bg-2 {
+  width: 100%;
+  height: 400px;
+  transform: skew(16deg) rotate(16deg);
+  background: linear-gradient(270deg, rgba(233,73,59,0.85) 48%, rgba(246,103,112,0) 100%);
+  position: absolute;
+  left: 0;
+  z-index: -1;
+  top: 30%;
+}
+
+section.third--section {
+  display: flex;
+  flex-direction: column;
+}
+
+.container-options {
+    display: flex;
+    justify-content: flex-end;
+    height: 100%;
+    align-items: center;
+}
+
+.container-options button {
+  border: none;
+  font-size: 17px;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 0.5em 1.5em;
+  border: none;
+  background: #ed675f;
+  border-radius: 25px;
+  color: white;
+}
+
+.exit-button {
+  font-size: 17px;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 0.5em 1.5em;
+  border: none;
+  background: #ed675f;
+  border-radius: 25px;
+  color: white;
+  position: fixed;
+  z-index: 9;
+  bottom: 10px;
+  visibility: hidden;
 }
