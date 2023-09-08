@@ -20,12 +20,11 @@ import {
     ITexture, TweakpaneUiPlugin, AssetManagerBasicPopupPlugin, CanvasSnipperPlugin,
 
     IViewerPlugin,
+    AssetImporter,
 
     // Color, // Import THREE.js internals
     // Texture, // Import THREE.js internals
 } from "webgi";
-import "./styles.css";
-
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 
@@ -55,9 +54,27 @@ async function setupViewer(){
 
     // This must be called once after all plugins are added.
     viewer.renderer.refreshPipeline()
+    //Loader
+    const importer = manager.importer as AssetImporter
 
+    importer.addEventListener('onProgress', (e) => {
+        const progressRatio = (e.loaded / e.total)
+        console.log('progressRatio: ', progressRatio * 100)
 
+        document.querySelector('.progress')?.setAttribute('style', `width: ${progressRatio * 100}%`)
+    })
 
+		importer.addEventListener('onLoad', () => {
+			gsap.to('.loader', {
+				x: '100%',
+				ease: 'power4.inOut',
+				delay: 1,
+				duration: 0.5, 
+				onComplete: () => {
+					document.body.style.overflowY = 'auto'
+				}
+			})
+		})
 
     // Import and add a GLB file.
     await viewer.load("./assets/megaphone_2.glb")
@@ -83,12 +100,14 @@ async function setupViewer(){
     // Fix animation camera shake problem
     viewer.scene.activeCamera.setCameraOptions({controlsEnabled: false})
     
+		window.scrollTo(0,0)
+
     onUpdate()
 
     const setupScrollAnimation =()=> {
         const tl = gsap.timeline()
     
-        //First section
+        //Second section
         tl.to(position, {
             x: 4.58, 
             y: 0.52,
@@ -127,7 +146,7 @@ async function setupViewer(){
             },
         })
 
-         //Second section
+         //Last section
          tl.to(position, {
             x: -5.28, 
             y: -0.19,

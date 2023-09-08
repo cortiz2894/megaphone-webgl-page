@@ -12,6 +12,7 @@ body {
   margin: 0;
   overflow-x: hidden;
   padding: 0;
+  overflow-y: hidden;
 }
 
 #webgi-canvas {
@@ -137,4 +138,29 @@ section.third--section {
   z-index: 9;
   bottom: 10px;
   visibility: hidden;
+}
+
+.loader {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  flex-direction: column;
+  background-color: #0d0e0f;
+  z-index: 3;
+}
+
+.loader p {
+  margin-bottom: 2em;
+}
+
+.progress {
+  height: 1px;
+  /* transform: scaleX(0); */
+  background: white;
+  width: 0%;
+  transition: width 1s ease;
 }
