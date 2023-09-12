@@ -121,18 +121,6 @@ async function setupViewer(){
             },
             onUpdate,
         })
-        tl.to('.title-first', {
-            xPercent: '150', 
-            opacity: 0,
-            scrollTrigger: { 
-                trigger: '.second--section',
-                start: "top bottom",
-                end: 'top top',
-                scrub: true,
-                immediateRender:false
-            },
-            onUpdate,
-        })
         tl.to(target, {
             x: -0.86, 
             y: -0.05,
@@ -145,8 +133,43 @@ async function setupViewer(){
                 immediateRender:false
             },
         })
+        tl.to('#webgi-canvas-container', {
+            opacity: 0,
+            scrollTrigger: { 
+                trigger: '.second--section',
+                start: "150",
+                end: '400',
+                scrub: true,
+                immediateRender:false
+            },
+        })
+        tl.to('#webgi-canvas-container', {
+            opacity: 1,
+            scrollTrigger: { 
+                trigger: '.second--section',
+                start: "400",
+                end: '500',
+                scrub: true,
+                immediateRender:false
+            },
+        })
+        tl.to('.title-first', {
+            xPercent: '150', 
+            opacity: 0,
+            scrollTrigger: { 
+                trigger: '.second--section',
+                start: "top bottom",
+                end: 'top top',
+                scrub: true,
+                immediateRender:false
+            },
+            onUpdate,
+        })
+        
+
 
          //Last section
+         
          tl.to(position, {
             x: -5.28, 
             y: -0.19,
@@ -160,7 +183,6 @@ async function setupViewer(){
             },
             onUpdate,
         })
-
         tl.to(target, {
             x: -0.71, 
             y: 0.16,
@@ -169,6 +191,27 @@ async function setupViewer(){
                 trigger: '.third--section',
                 start: "top bottom",
                 end: 'top top',
+                scrub: true,
+                immediateRender:false
+            },
+        })
+        tl.to('#webgi-canvas-container', {
+            opacity: 0,
+            scrollTrigger: { 
+                trigger: '.third--section',
+                start: "top bottom",
+                end: 'top 50%',
+                // markers: true,
+                scrub: true,
+                immediateRender:false
+            },
+        })
+        tl.to('#webgi-canvas-container', {
+            opacity: 1,
+            scrollTrigger: { 
+                trigger: '.third--section',
+                start: "top 50%",
+                end: 'top 40%',
                 scrub: true,
                 immediateRender:false
             },
