@@ -32,6 +32,7 @@
   },
   "type": "module",
   "dependencies": {
+    "events": "^3.3.0",
     "gsap": "^3.12.2"
   }
 }

@@ -15,6 +15,21 @@ body {
   padding: 0;
   overflow-y: hidden;
   background-color: #efeae3;
+  cursor: none;
+  /* Cursor styles */
+	--cursor-stroke: #efeae3;
+	--cursor-fill: #ed675f;
+	--cursor-stroke-width: 1px;
+}
+
+h2 {
+  font-family: 'Neue Haas Grotesk Display Pro', sans-serif;
+  font-weight: 400;
+  margin-bottom: 0px;
+}
+
+button {
+  cursor: none;
 }
 
 #webgi-canvas {
@@ -43,6 +58,9 @@ nav {
   position: absolute;
   left: 0;
   top: 0;
+  max-height: 85px;
+  align-items: center;
+  overflow: hidden;
 }
 
 .button--nav {
@@ -50,11 +68,19 @@ nav {
   text-transform: uppercase;
   font-weight: 600;
   padding: 0.5em 1.5em;
-  border: none;
-  background: none;
-  border: 1px solid #0d0e0f;
-  color: #0d0e0f;
+  border: 1px solid #ed675f;
+  background: #ed675f00;
+  /* border: none; */
+  color: #ed675f;
   border-radius: 25px;
+  position: relative;
+  z-index: 1;
+  transition: color 0.2s ease;
+}
+.button--nav:hover {
+  background: #ed675f00;
+  border: 1px solid #ed675f00;
+  color: #efeae3;
 }
 
 .logo {
@@ -120,31 +146,13 @@ section.third--section {
     margin-top: 5em;
 }
 
-.container-options button {
-  border: none;
-  font-size: 17px;
-  text-transform: uppercase;
-  font-weight: 600;
-  padding: 0.5em 1.5em;
-  border: none;
-  background: #ed675f;
-  border-radius: 25px;
-  color: white;
-}
-
 .exit-button {
-  font-size: 17px;
-  text-transform: uppercase;
-  font-weight: 600;
-  padding: 0.5em 1.5em;
-  border: none;
-  background: #ed675f;
-  border-radius: 25px;
-  color: white;
-  position: fixed;
-  z-index: 9;
-  bottom: 10px;
+  font-size: 17px; 
+  bottom: 5%;
+  position: fixed !important;
   visibility: hidden;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .loader {
@@ -188,6 +196,7 @@ section.third--section {
   display: flex;
   align-items: end;
   justify-content: center;
+  margin-bottom: 5%;
 }
 
 .third--section .center-section {
@@ -204,4 +213,65 @@ section.third--section {
   font-family: 'Neue Haas Grotesk Display Pro', sans-serif;
   font-weight: 500;
   margin-bottom: 0;
+}
+.cursor {
+	display: none;
+}
+@media (any-pointer: fine) {
+	.cursor {
+		position: fixed;
+		top: 0;
+		left: 0;
+		display: block;
+		pointer-events: none;
+		opacity: 0;
+	}
+	.cursor__inner {
+		fill: var(--cursor-fill);
+		stroke: var(--cursor-stroke);
+		stroke-width: var(--cursor-stroke-width);
+	}
+}
+footer {
+  background-color: #1d1d1d;
+  padding: 5em 3em;
+  padding-bottom: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #efeae3;
+  /* margin-top: 5em; */
+  font-family: 'Neue Haas Grotesk Display Pro', sans-serif;
+}
+
+
+.related-links {
+  display: flex;
+  margin-top: 4em;
+  justify-content: flex-end;
+  align-items: end;
+  width: 100%;
+}
+
+.related-links button:hover {
+  text-decoration: underline;
+}
+
+.related-links button {
+  background: none;
+  border: none;
+  color: #efeae3;
+  z-index: 1;
+  position: relative;
+}
+
+.related-links button a {
+  color: #efeae3;
+  font-weight: 500;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+footer img {
+  margin-bottom: 1em;
 }

@@ -27,8 +27,21 @@ import {
 } from "webgi";
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
+import Cursor from './utils/cursor';
 
 gsap.registerPlugin(ScrollTrigger)
+
+
+const cursor = new Cursor(document.querySelector('.cursor'));
+//@ts-ignore
+[...document.querySelectorAll('button')].forEach(el => {
+    //@ts-ignore
+    el.addEventListener('mouseenter', () => cursor.emit('enter'));
+    //@ts-ignore
+    el.addEventListener('mouseleave', () => cursor.emit('leave'));
+});
+
+
 
 async function setupViewer(){
 
@@ -59,7 +72,7 @@ async function setupViewer(){
 
     importer.addEventListener('onProgress', (e) => {
         const progressRatio = (e.loaded / e.total)
-        console.log('progressRatio: ', progressRatio * 100)
+        // console.log('progressRatio: ', progressRatio * 100)
 
         document.querySelector('.progress')?.setAttribute('style', `width: ${progressRatio * 100}%`)
     })
@@ -76,6 +89,8 @@ async function setupViewer(){
 			})
 		})
 
+		const footer = document.getElementById('footer') as HTMLElement
+
     // Import and add a GLB file.
     await viewer.load("./assets/megaphone_2.glb")
     // Add some UI for tweak and testing.
@@ -87,7 +102,22 @@ async function setupViewer(){
     const onUpdate = ()=> {
         needsUpdate = true
         viewer.renderer.resetShadows()
+				// removeEventListener('scroll', scrollPosition)
     }
+
+		const stopFixedScene = () => {
+			const footerExist = checkVisible(footer)
+			
+			if (footerExist) {
+				viewerDom.style.position = 'absolute'
+				canvasDom.style.position = 'absolute'
+				viewerDom.style.top = '210%' 
+			} else {
+					viewerDom.style.position = 'fixed'
+					canvasDom.style.position = 'fixed'
+					viewerDom.style.top = 'inherit' 
+			} 
+		}
 
     viewer.addEventListener('preFrame', () => {
         if(needsUpdate) {
@@ -103,6 +133,19 @@ async function setupViewer(){
 		window.scrollTo(0,0)
 
     onUpdate()
+
+		const viewerDom = document.getElementById('webgi-canvas-container') as HTMLElement
+		const canvasDom = document.getElementById('webgi-canvas') as HTMLElement
+
+		//@ts-ignore
+		const checkVisible = (elm) => {
+			// console.log(elm)
+			var rect = elm.getBoundingClientRect();
+		 console.log(rect)
+			var viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
+			return !(rect.bottom  < 0 || rect.top - viewHeight >= 0);
+		}
+
 
     const setupScrollAnimation =()=> {
         const tl = gsap.timeline()
@@ -120,6 +163,9 @@ async function setupViewer(){
                 immediateRender:false
             },
             onUpdate,
+						onComplete: () => {
+							window.removeEventListener('scroll', stopFixedScene)
+						}
         })
         tl.to(target, {
             x: -0.86, 
@@ -164,9 +210,8 @@ async function setupViewer(){
                 immediateRender:false
             },
             onUpdate,
-        })
-        
 
+        })
 
          //Last section
          
@@ -194,7 +239,22 @@ async function setupViewer(){
                 scrub: true,
                 immediateRender:false
             },
+						onComplete: () => {
+							window.addEventListener('scroll', stopFixedScene)
+						}
         })
+        // tl.to('.second--section', {
+        //     xPercent: '-50', 
+        //     opacity: 0,
+        //     scrollTrigger: { 
+        //         trigger: '.third--section',
+        //         start: "top bottom",
+        //         end: 'top top',
+        //         scrub: 1,
+        //         immediateRender:false
+        //     },
+        //     onUpdate,
+        // })
         tl.to('#webgi-canvas-container', {
             opacity: 0,
             scrollTrigger: { 
@@ -222,7 +282,6 @@ async function setupViewer(){
     setupScrollAnimation()
 
 		const contentPage = document.querySelector('.general-container') as HTMLElement 
-		const viewerDom = document.getElementById('webgi-canvas-container') as HTMLElement
 		const exitButton = document.querySelector('.exit-button') as HTMLElement
 
 		document.querySelector('.customize-btn')?.addEventListener('click', () => {
@@ -256,7 +315,7 @@ async function setupViewer(){
 			exitButton.style.visibility = 'hidden'
 			contentPage.style.visibility = 'visible'
 			viewerDom.style.pointerEvents = 'none'
-			document.body.style.cursor = 'cursor'
+			document.body.style.cursor = 'none'
 			viewer.scene.activeCamera.setCameraOptions({controlsEnabled: false})
 			gsap.to(position, {
 				x: -5.28, 
