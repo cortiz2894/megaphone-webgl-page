@@ -28,6 +28,7 @@ import {
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import Cursor from './utils/cursor';
+// import Menu from './utils/menu'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -41,7 +42,30 @@ const cursor = new Cursor(document.querySelector('.cursor'));
     el.addEventListener('mouseleave', () => cursor.emit('leave'));
 });
 
+const menu = document.getElementById('menu')
+const drawer = document.querySelector('.menu-drawer') as HTMLElement 
 
+menu?.addEventListener('click', () => {
+    if(menu.classList.contains('active')) {
+			closeMenu()
+		} else {
+			openMenu()
+    }
+})
+
+const openMenu = () => {
+	menu?.classList.add('active')
+	drawer?.classList.add('active')
+	document.body.style.overflowY = 'hidden'
+	document.body.classList.add('overlay')
+}
+
+const closeMenu = () => {
+	menu?.classList.remove('active')
+	drawer?.classList.remove('active')
+	document.body.style.overflowY = 'auto'
+	document.body.classList.remove('overlay')
+}
 
 async function setupViewer(){
 
