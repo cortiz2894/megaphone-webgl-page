@@ -17,8 +17,8 @@ export default class Cursor extends EventEmitter {
         super();
         this.DOM = {el: el};
         this.DOM.el.style.opacity = 0;
-        this.DOM.el.style.transition = 'fill-opacity 0.2s ease';
-
+        this.DOM.el.style.stroke ='#efeae3'
+        this.DOM.el.style.transition = 'fill-opacity 0.2s ease , stroke 0.2s ease'; 
         this.DOM.circleInner = this.DOM.el.querySelector('.cursor__inner');
         
         this.filterId = '#filter-1';
@@ -86,13 +86,21 @@ export default class Cursor extends EventEmitter {
         // this.DOM.el.style.fillOpacity = 0
         this.tl.restart();
     }
+    enterNav() {
+        this.renderedStyles['radius'].current = 50;
+        this.DOM.el.style.fillOpacity = 0
+        this.DOM.el.style.stroke ='#000000'
+        this.tl.restart();
+    }
     leave() {
         this.renderedStyles['radius'].current = 20;
+        this.DOM.el.style.stroke ='#efeae3'
         this.DOM.el.style.fillOpacity = 1
         this.tl.progress(1).kill();
     }
     listen() {
         this.on('enter', () => this.enter());
+        this.on('enterNav', () => this.enterNav());
         this.on('leave', () => this.leave());
     }
 }

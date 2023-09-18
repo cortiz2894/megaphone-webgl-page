@@ -17,7 +17,6 @@ body {
   background-color: #efeae3;
   cursor: none;
   /* Cursor styles */
-	--cursor-stroke: #efeae3;
 	--cursor-fill: #ed675f;
 	--cursor-stroke-width: 1px;
 }
@@ -342,7 +341,7 @@ body:before {
   width: 40%;
   z-index: 1;
   position: fixed;
-  background: white;
+  background: #efeae3;
   top: 0;
   right: -40%;
   transition: right .5s ease;
@@ -351,4 +350,29 @@ body:before {
 .menu-drawer.active {
   right: 0%;
   transition: right .8s ease;
+}
+
+.menu-drawer ul {
+  list-style: none;
+  width: 100%;
+  margin: 0;
+  padding: 10em 5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: baseline;
+  height: 100%;
+}
+.menu-drawer button:hover {
+  color: #ed675f;
+  background-color: none !important;
+}
+.menu-drawer button {
+  text-transform: none;
+  color: #0d0e0f;
+  font-size: 3em;
+  font-weight: 300;
+  z-index: 90;
+  padding: 0;
+  border: none !important;
 }

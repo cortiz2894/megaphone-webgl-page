@@ -42,6 +42,14 @@ const cursor = new Cursor(document.querySelector('.cursor'));
     el.addEventListener('mouseleave', () => cursor.emit('leave'));
 });
 
+//@ts-ignore
+[...document.querySelectorAll('.button-menu')].forEach(el => {
+    //@ts-ignore
+    el.addEventListener('mouseenter', () => cursor.emit('enterNav'));
+    //@ts-ignore
+    el.addEventListener('mouseleave', () => cursor.emit('leave'));
+});
+
 const menu = document.getElementById('menu')
 const drawer = document.querySelector('.menu-drawer') as HTMLElement 
 
