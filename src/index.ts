@@ -250,7 +250,6 @@ async function setupViewer(){
                 immediateRender:false
             },
             onUpdate,
-
         })
 
          //Last section
@@ -283,18 +282,20 @@ async function setupViewer(){
 							window.addEventListener('scroll', stopFixedScene)
 						}
         })
-        // tl.to('.second--section', {
-        //     xPercent: '-50', 
-        //     opacity: 0,
-        //     scrollTrigger: { 
-        //         trigger: '.third--section',
-        //         start: "top bottom",
-        //         end: 'top top',
-        //         scrub: 1,
-        //         immediateRender:false
-        //     },
-        //     onUpdate,
-        // })
+				isMobile && (
+					tl.to('.second--section', {
+							xPercent: '-150', 
+							opacity: 0,
+							scrollTrigger: { 
+									trigger: '.third--section',
+									start: "top bottom",
+									end: 'top center',
+									scrub: 1,
+									immediateRender:false
+							},
+							onUpdate,
+					})
+				)
         tl.to('#webgi-canvas-container', {
             opacity: isMobile ? 1 : 0,
             scrollTrigger: { 
