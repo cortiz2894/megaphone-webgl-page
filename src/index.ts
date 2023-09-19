@@ -15,7 +15,7 @@ import {
     TemporalAAPlugin,
     AnisotropyPlugin,
     GammaCorrectionPlugin,
-
+    mobileAndTabletCheck,
     addBasePlugins,
     ITexture, TweakpaneUiPlugin, AssetManagerBasicPopupPlugin, CanvasSnipperPlugin,
 
@@ -99,6 +99,9 @@ async function setupViewer(){
 
     // This must be called once after all plugins are added.
     viewer.renderer.refreshPipeline()
+    //Mobile
+    const isMobile = mobileAndTabletCheck()
+    console.log('isMobile: ', isMobile)
     //Loader
     const importer = manager.importer as AssetImporter
 
@@ -143,7 +146,7 @@ async function setupViewer(){
 			if (footerExist) {
 				viewerDom.style.position = 'absolute'
 				canvasDom.style.position = 'absolute'
-				viewerDom.style.top = '210%' 
+				viewerDom.style.top = '203%' 
 			} else {
 					viewerDom.style.position = 'fixed'
 					canvasDom.style.position = 'fixed'
@@ -164,7 +167,12 @@ async function setupViewer(){
     
 		window.scrollTo(0,0)
 
-    onUpdate()
+		if(isMobile){
+			position.set(-7.57, -2.75, -2.99)
+			target.set(-0.51, 0.19, 0.11)
+		}
+
+		onUpdate()
 
 		const viewerDom = document.getElementById('webgi-canvas-container') as HTMLElement
 		const canvasDom = document.getElementById('webgi-canvas') as HTMLElement
@@ -184,9 +192,9 @@ async function setupViewer(){
     
         //Second section
         tl.to(position, {
-            x: 4.58, 
-            y: 0.52,
-            z: 4.02, 
+						x: isMobile ? -8.94 : 4.58, 
+            y: isMobile ? -2.46 : 0.52,
+            z: isMobile ? 2.31 : 4.02, 
             scrollTrigger: { 
                 trigger: '.second--section',
                 start: "top bottom",
@@ -200,9 +208,9 @@ async function setupViewer(){
 						}
         })
         tl.to(target, {
-            x: -0.86, 
-            y: -0.05,
-            z: 1.04, 
+            x: isMobile ? -0.96 : -0.86, 
+            y: isMobile ? -0.33 : -0.05,
+            z: isMobile ? -0.10 : 1.04, 
             scrollTrigger: { 
                 trigger: '.second--section',
                 start: "top bottom",
@@ -212,7 +220,7 @@ async function setupViewer(){
             },
         })
         tl.to('#webgi-canvas-container', {
-            opacity: 0,
+            opacity: isMobile ? 1 : 0,
             scrollTrigger: { 
                 trigger: '.second--section',
                 start: "150",
@@ -233,7 +241,7 @@ async function setupViewer(){
         })
         tl.to('.title-first', {
             xPercent: '150', 
-            opacity: 0,
+            opacity: isMobile ? 1 : 0,
             scrollTrigger: { 
                 trigger: '.second--section',
                 start: "top bottom",
@@ -248,9 +256,9 @@ async function setupViewer(){
          //Last section
          
          tl.to(position, {
-            x: -5.28, 
-            y: -0.19,
-            z: -3.35, 
+            x: isMobile ? -5.00 : -5.28, 
+            y: isMobile ? -5.23 : -0.19,
+            z: isMobile ? -0.00 : -3.35, 
             scrollTrigger: { 
                 trigger: '.third--section',
                 start: "top bottom",
@@ -261,9 +269,9 @@ async function setupViewer(){
             onUpdate,
         })
         tl.to(target, {
-            x: -0.71, 
-            y: 0.16,
-            z: 0.88, 
+            x: isMobile ? -1.18 : -0.71, 
+            y: isMobile ? 0.18 : 0.16,
+            z: isMobile ? -0.01 : 0.88, 
             scrollTrigger: { 
                 trigger: '.third--section',
                 start: "top bottom",
@@ -288,7 +296,7 @@ async function setupViewer(){
         //     onUpdate,
         // })
         tl.to('#webgi-canvas-container', {
-            opacity: 0,
+            opacity: isMobile ? 1 : 0,
             scrollTrigger: { 
                 trigger: '.third--section',
                 start: "top bottom",

@@ -90,6 +90,7 @@ export default class Cursor extends EventEmitter {
         this.renderedStyles['radius'].current = 50;
         this.DOM.el.style.fillOpacity = 0
         this.DOM.el.style.stroke ='#000000'
+        this.DOM.el.style.transition = 'fill-opacity 0s ease , stroke 0s ease'; 
         this.tl.restart();
     }
     leave() {
