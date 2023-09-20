@@ -189,7 +189,14 @@ async function setupViewer(){
 
     const setupScrollAnimation =()=> {
         const tl = gsap.timeline()
-    
+
+				isMobile && (
+					tl.to('.third--section .center-section', {
+						opacity: 0,
+						yPercent: '150', 
+					})
+				)
+
         //Second section
         tl.to(position, {
 						x: isMobile ? -8.94 : 4.58, 
@@ -317,7 +324,19 @@ async function setupViewer(){
                 immediateRender:false
             },
         })
-        
+				isMobile && (
+					tl.to('.third--section .center-section', {
+						opacity: 1,
+						yPercent: '0', 
+						scrollTrigger: { 
+								trigger: '.third--section',
+								start: "top bottom",
+								end: 'top top',
+								scrub: true,
+								immediateRender:false
+						},
+					})
+				)
     }
     
     setupScrollAnimation()
