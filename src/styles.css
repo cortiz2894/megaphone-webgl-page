@@ -12,6 +12,8 @@ body {
   font-family: sans-serif;
   margin: 0;
   overflow-x: hidden;
+  height: 100%;
+  position: relative;
   padding: 0;
   overflow-y: hidden;
   background-color: #efeae3;
