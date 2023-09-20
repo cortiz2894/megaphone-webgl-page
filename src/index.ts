@@ -140,12 +140,12 @@ async function setupViewer(){
 				// removeEventListener('scroll', scrollPosition)
     }
 
-		const getStopModelPosition = ():string => {
+		const getStopModelPosition = ():number => {
 			let bodyHeight = document.body.offsetHeight
-			let footerHeight = footer.offsetHeight
 			let windowHeight = window.innerHeight
+			let footerHeight = footer.offsetHeight
 			
-			return `${bodyHeight - footerHeight - windowHeight}px`
+			return bodyHeight - footerHeight - windowHeight
 		}
 
 		const stopFixedScene = () => {
@@ -154,7 +154,7 @@ async function setupViewer(){
 			if (footerExist) {
 				viewerDom.style.position = 'absolute'
 				canvasDom.style.position = 'absolute'
-				viewerDom.style.top = getStopModelPosition()
+				viewerDom.style.top = `${getStopModelPosition()}px`
 			} else {
 					viewerDom.style.position = 'fixed'
 					canvasDom.style.position = 'fixed'
@@ -359,7 +359,9 @@ async function setupViewer(){
 			viewerDom.style.pointerEvents = 'all'
 			document.body.style.cursor = 'grab'
 			exitButton.style.visibility = 'visible'
-
+			
+			window.scrollTo(0, getStopModelPosition())
+			
 			gsap.to(position, {
 				x: -7.20, 
 				y: -1.12,
