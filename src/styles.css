@@ -379,6 +379,9 @@ body:before {
 
 
 @media(max-width: 776px) {
+  body { 
+    overflow-x: hidden;
+  }
   footer {
     position: relative;
     z-index:2;

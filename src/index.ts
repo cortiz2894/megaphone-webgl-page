@@ -144,8 +144,7 @@ async function setupViewer(){
 			let bodyHeight = document.body.offsetHeight
 			let footerHeight = footer.offsetHeight
 			let windowHeight = window.innerHeight
-			console.log('body:' , bodyHeight)
-			console.log('position: ', bodyHeight - footerHeight - windowHeight)
+			
 			return `${bodyHeight - footerHeight - windowHeight}px`
 		}
 
