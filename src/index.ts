@@ -66,6 +66,12 @@ const openMenu = () => {
 	drawer?.classList.add('active')
 	document.body.style.overflowY = 'hidden'
 	document.body.classList.add('overlay')
+	gsap.to('.menu-drawer .anim-btn', {
+		opacity: 1,
+		duration: .3,
+		y: 0,
+		stagger: 0.1
+	})
 }
 
 const closeMenu = () => {
@@ -73,6 +79,12 @@ const closeMenu = () => {
 	drawer?.classList.remove('active')
 	document.body.style.overflowY = 'auto'
 	document.body.classList.remove('overlay')
+		gsap.to('.anim-btn', {
+			opacity: 0,
+			delay: 0.3,
+			y: -100,
+			stagger: 0.1
+		})
 }
 
 async function setupViewer(){
@@ -361,7 +373,7 @@ async function setupViewer(){
 			exitButton.style.visibility = 'visible'
 			
 			window.scrollTo(0, getStopModelPosition())
-			
+
 			gsap.to(position, {
 				x: -7.20, 
 				y: -1.12,
