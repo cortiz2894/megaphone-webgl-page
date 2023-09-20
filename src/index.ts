@@ -140,13 +140,22 @@ async function setupViewer(){
 				// removeEventListener('scroll', scrollPosition)
     }
 
+		const getStopModelPosition = ():string => {
+			let bodyHeight = document.body.offsetHeight
+			let footerHeight = footer.offsetHeight
+			let windowHeight = window.innerHeight
+			console.log('body:' , bodyHeight)
+			console.log('position: ', bodyHeight - footerHeight - windowHeight)
+			return `${bodyHeight - footerHeight - windowHeight}px`
+		}
+
 		const stopFixedScene = () => {
 			const footerExist = checkVisible(footer)
 			
 			if (footerExist) {
 				viewerDom.style.position = 'absolute'
 				canvasDom.style.position = 'absolute'
-				viewerDom.style.top = '203%' 
+				viewerDom.style.top = getStopModelPosition()
 			} else {
 					viewerDom.style.position = 'fixed'
 					canvasDom.style.position = 'fixed'
