@@ -386,17 +386,17 @@ async function setupViewer(){
 			document.body.style.cursor = 'none'
 			viewer.scene.activeCamera.setCameraOptions({controlsEnabled: false})
 			gsap.to(position, {
-				x: -5.28, 
-				y: -0.19,
-				z: -3.35,
+				x: isMobile ? -5.00 : -5.28, 
+				y: isMobile ? -5.23 : -0.19,
+				z: isMobile ? -0.00 : -3.35, 
 				duration: 2,
 				ease: 'power3.inOut',
 				onUpdate,
 			})
 			gsap.to(target, {
-					x: -0.71, 
-					y: 0.16,
-					z: 0.88, 
+					x: isMobile ? -1.18 : -0.71, 
+					y: isMobile ? 0.18 : 0.16,
+					z: isMobile ? -0.01 : 0.88, 
 					duration: 2,
 					ease: 'power3.inOut',
 			})
